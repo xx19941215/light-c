@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define NUM 100
 
 void menu();
@@ -25,6 +26,7 @@ int loop = 1;
 char key;
 int customerNum = 1;
 char choice = ' ';
+char n;
 
 
 int update(int id)
@@ -36,56 +38,88 @@ int update(int id)
         return 0;
     }
 
+    rewind(stdin);
     printf("\n-------修改客户-------");
     printf("\n姓名(%s):", customers[index].name);
 
-    char name[50];
-    scanf("%s", name);
-    if (strcmp(name, "\r")) {
+    char ch, b[50], name[50];
+	ch=getchar();
+	if (ch == 10) {
+		// printf("打了空格\n");
+	} else {
+		//不是空格 保存字符
+		scanf("%s", b);
+		strcpy(name, &ch);
+		strcat(name, b);
+        printf("name=%s\n", name);
         strcpy(customers[index].name, name);
-    } 
-    getchar();
+	}
 
     char gender; // m或者f
+    rewind(stdin);
     printf("\n性别(%c): ", customers[index].gender);
-    scanf("%c", &gender);
-    if (strcmp(&gender, "\r")) {
-        strcpy(&customers[index].gender, &gender);
+
+	gender=getchar();
+    if (ch == 10) {
+		// printf("打了空格\n");
+	} else {
+        customers[index].gender = gender;
     }
-    getchar();
 
     int age;
+    rewind(stdin);
+    char c[50], ageStr[50];
     printf("\n 年龄:(%d)", customers[index].age);
-    scanf("%d", &age);
 
-    char ageStr[20];
-    sprintf(ageStr, "%d", age);
-    if (strcmp(ageStr, "\r")) {
-        customers[index].age = age;
-    }
-    getchar();
 
-    char phone[50];
+	char ch2=getchar();
+    if (ch2 == 10) {
+		// printf("打了空格\n");
+	} else {
+		//不是空格 保存字符
+		scanf("%s", c);
+        printf("c=%s\n", c);
+		strcpy(ageStr, &ch2);
+		strcat(ageStr, c);
+        printf("age=%s\n", ageStr);
+        customers[index].age = atoi(ageStr);
+	}
+
+
+    rewind(stdin);
     printf("\n 电话(%s):", customers[index].phone);
-    scanf("%s", phone);
-
-    if (strcmp(phone, "\r")) {
+    char d[50], phone[50];
+	ch=getchar();
+	if (ch == 10) {
+		// printf("打了空格\n");
+	} else {
+		//不是空格 保存字符
+		scanf("%s", d);
+		strcpy(phone, &ch);
+		strcat(phone, d);
+        printf("phone=%s\n", phone);
         strcpy(customers[index].phone, phone);
-    }
-    getchar();
+	}
 
-    char email[50];
+
+
+    rewind(stdin);
+    char e[50], email[50];
     printf("\n 邮箱(%s):", customers[index].email);
-    scanf("%s", email);
-    if (strcmp(email, "\r")) {
+    ch=getchar();
+	if (ch == 10) {
+		// printf("打了空格\n");
+	} else {
+		//不是空格 保存字符
+		scanf("%s", e);
+		strcpy(email, &ch);
+		strcat(email, e);
+        printf("email=%s\n", email);
         strcpy(customers[index].email, email);
-    }
-    getchar();
+	}
 
     printf("\n-------修改完成-------");
     return 0;
-
-
 }
 
 void menu()
