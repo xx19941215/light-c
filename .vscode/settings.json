@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
+        "string.h": "c",
+        "__bit_reference": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "unordered_map": "c",
+        "sstream": "cpp",
+        "stdio.h": "c",
+        "stdlib.h": "c"
+    }
+}
