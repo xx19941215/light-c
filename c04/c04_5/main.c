@@ -42,15 +42,12 @@ int update(int id)
     printf("\n-------修改客户-------");
     printf("\n姓名(%s):", customers[index].name);
 
-    char ch, b[50], name[50];
-	ch=getchar();
-	if (ch == 10) {
+    char name[50];
+	gets(name);
+	if (strlen(name) == 0) {
 		// printf("打了空格\n");
 	} else {
 		//不是空格 保存字符
-		scanf("%s", b);
-		strcpy(name, &ch);
-		strcat(name, b);
         printf("name=%s\n", name);
         strcpy(customers[index].name, name);
 	}
@@ -60,27 +57,21 @@ int update(int id)
     printf("\n性别(%c): ", customers[index].gender);
 
 	gender=getchar();
-    if (ch == 10) {
+    if (gender == 10) {
 		// printf("打了空格\n");
 	} else {
         customers[index].gender = gender;
     }
 
-    int age;
     rewind(stdin);
-    char c[50], ageStr[50];
+    char ageStr[50];
     printf("\n 年龄:(%d)", customers[index].age);
 
 
-	char ch2=getchar();
-    if (ch2 == 10) {
-		// printf("打了空格\n");
+	gets(ageStr);
+    if (strlen(ageStr) == 0) {
+		printf("打了空格\n");
 	} else {
-		//不是空格 保存字符
-		scanf("%s", c);
-        printf("c=%s\n", c);
-		strcpy(ageStr, &ch2);
-		strcat(ageStr, c);
         printf("age=%s\n", ageStr);
         customers[index].age = atoi(ageStr);
 	}
@@ -88,15 +79,11 @@ int update(int id)
 
     rewind(stdin);
     printf("\n 电话(%s):", customers[index].phone);
-    char d[50], phone[50];
-	ch=getchar();
-	if (ch == 10) {
+    char phone[50];
+	gets(phone);
+	if (strlen(phone) == 0) {
 		// printf("打了空格\n");
 	} else {
-		//不是空格 保存字符
-		scanf("%s", d);
-		strcpy(phone, &ch);
-		strcat(phone, d);
         printf("phone=%s\n", phone);
         strcpy(customers[index].phone, phone);
 	}
@@ -104,16 +91,13 @@ int update(int id)
 
 
     rewind(stdin);
-    char e[50], email[50];
+    char email[50];
     printf("\n 邮箱(%s):", customers[index].email);
-    ch=getchar();
-	if (ch == 10) {
+    gets(email);
+	if (strlen(email) == 0) {
 		// printf("打了空格\n");
 	} else {
 		//不是空格 保存字符
-		scanf("%s", e);
-		strcpy(email, &ch);
-		strcat(email, e);
         printf("email=%s\n", email);
         strcpy(customers[index].email, email);
 	}

@@ -6,15 +6,16 @@
     "configurations": [
         {
             "name": "(lldb) 启动",
-            "type": "cppdbg",
+            // "type": "cppdbg", // for mac os mojave 
             "request": "launch",
-            "program": "${workspaceFolder}/c04/c04_5/test.o",
+            "program": "${workspaceFolder}/c04/c04_5/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": true,
-            "MIMode": "lldb"
+            "MIMode": "lldb",
+            "type": "lldb" // for mac os catalina
         }
     ]
 }
