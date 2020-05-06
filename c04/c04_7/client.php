@@ -1,6 +1,8 @@
 <?php
 
-$filename = "main";
+$file = $argv[1];
+
+$filename = __DIR__ . "/" . $file;
 
 $service_port = 8989;
 $address = 'localhost';

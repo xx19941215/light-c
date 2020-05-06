@@ -53,7 +53,7 @@ void handle_connection(int client_socket)
     char actualpath[PATH_MAX + 1];
 
     //read the client's message the name of the file to read
-    while(bytes_read == read(client_socket, buffer + msgsize, sizeof(buffer) - msgsize - 1) > 0) {
+    while((bytes_read = read(client_socket, buffer + msgsize, sizeof(buffer) - msgsize - 1)) > 0) {
         msgsize += bytes_read;
         if (msgsize > BUFSIZ - 1 || buffer[msgsize-1] == '\n') {
             break;
@@ -86,7 +86,7 @@ void handle_connection(int client_socket)
     //read the file contents and send them to client
     //note this is a fine example program, but rather insecure.
     //a real program would probably limit the client to certain file.
-    while((bytes_read == fread(buffer, 1, BUFFSIZE, fp)) > 0) {
+    while((bytes_read = fread(buffer, 1, BUFFSIZE, fp)) > 0) {
         printf("sending %zu bytes\n", bytes_read);
         write(client_socket, buffer, bytes_read);
     }
