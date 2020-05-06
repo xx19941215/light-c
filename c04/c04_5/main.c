@@ -9,7 +9,16 @@ void add();
 void delete();
 // int update(int id);
 int findIndex(int id);
+char* trimN(char* s);
 
+char* trimN(char* s)
+{
+    if (s[strlen(s) - 1] == '\n') {
+        s[strlen(s) - 1] = '\0';
+    }
+
+    return s;
+}
 
 typedef struct Customer
 {
@@ -43,12 +52,13 @@ int update(int id)
     printf("\n姓名(%s):", customers[index].name);
 
     char name[50];
-	gets(name);
+	fgets(name, 50, stdin);
 	if (strlen(name) == 0) {
 		// printf("打了空格\n");
 	} else {
 		//不是空格 保存字符
         printf("name=%s\n", name);
+        trimN(name);
         strcpy(customers[index].name, name);
 	}
 
@@ -68,11 +78,12 @@ int update(int id)
     printf("\n 年龄:(%d)", customers[index].age);
 
 
-	gets(ageStr);
+	fgets(ageStr, 50, stdin);
     if (strlen(ageStr) == 0) {
 		printf("打了空格\n");
 	} else {
         printf("age=%s\n", ageStr);
+        trimN(ageStr);
         customers[index].age = atoi(ageStr);
 	}
 
@@ -80,11 +91,12 @@ int update(int id)
     rewind(stdin);
     printf("\n 电话(%s):", customers[index].phone);
     char phone[50];
-	gets(phone);
+	fgets(phone, 50, stdin);
 	if (strlen(phone) == 0) {
 		// printf("打了空格\n");
 	} else {
         printf("phone=%s\n", phone);
+        trimN(phone);
         strcpy(customers[index].phone, phone);
 	}
 
@@ -93,12 +105,13 @@ int update(int id)
     rewind(stdin);
     char email[50];
     printf("\n 邮箱(%s):", customers[index].email);
-    gets(email);
+    fgets(email, 50, stdin);
 	if (strlen(email) == 0) {
 		// printf("打了空格\n");
 	} else {
 		//不是空格 保存字符
         printf("email=%s\n", email);
+        trimN(email);
         strcpy(customers[index].email, email);
 	}
 
