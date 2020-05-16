@@ -19,6 +19,7 @@
 
 pthread_t thread_pool[THREAD_POOL_SIZE];
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condition_var = PTHREAD_COND_INITIALIZER;
 typedef struct sockaddr_in SA_IN;
 typedef struct sockaddr SA;
 
@@ -62,8 +63,10 @@ int main() {
         // pthread_t t;
         int *pclient = malloc(sizeof(int));
         *pclient = client_socket;
+        //make sure only one thread messes with the queue at a time 
         pthread_mutex_lock(&mutex);
         enqueue(pclient);
+        pthread_cond_signal(&condition_var);
         pthread_mutex_unlock(&mutex);
         // pthread_create(&t, NULL, handle_connection, pclient);
         // handle_connection(client_socket);
@@ -137,12 +140,18 @@ int check(int exp, const char *msg)
 void * thread_function(void *arg)
 {
     while(true) {
+        int *pclient;
         pthread_mutex_lock(&mutex);
-        int *pclinet = dequeue();
+        if ((pclient = dequeue()) == NULL) {
+            pthread_cond_wait(&condition_var, &mutex);
+            // try again
+            pclient = dequeue();
+        }
+        
         pthread_mutex_unlock(&mutex);
-        if (pclinet != NULL) {
+        if (pclient != NULL) {
             //we have a connection 
-            handle_connection(pclinet);
+            handle_connection(pclient);
         }
     }
 }
